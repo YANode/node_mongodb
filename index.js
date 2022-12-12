@@ -8,6 +8,14 @@ const addRoutes = require('./routs/add');
 const coursesRoutes = require('./routs/courses');
 const cardRoutes = require('./routs/card');
 
+
+//cloud.mongodb.com
+const password_old = 'BXz3ZL8e7NCdcy63';
+const password = 'qblEcEvPdp3xh2bT';
+const url = `mongodb+srv://anode:qblEcEvPdp3xh2bT@cluster0.o5pllfj.mongodb.net/?retryWrites=true&w=majority`
+
+
+
 const hbs = exphbs.create ({
     defaultLayout: 'main',
     extname: 'hbs'
