@@ -31,7 +31,7 @@ app.use('/card', cardRoutes);
 async function start() {
     try {
         mongoose.set('strictQuery', true);
-        const url = `mongodb+srv://anode:bOKT2JLZavt6zpY3@cluster0.o5pllfj.mongodb.net/?retryWrites=true&w=majority`//cloud.mongodb.com
+        const url = `mongodb+srv://anode:bOKT2JLZavt6zpY3@cluster0.o5pllfj.mongodb.net/shop`//cloud.mongodb.com
         await mongoose.connect(url, {useNewUrlParser: true});
 
         app.listen(PORT, () => {
