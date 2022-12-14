@@ -1,5 +1,6 @@
 const express = require('express');
-const path = require ('path');
+const path = require('path');
+const mongoose = require('mongoose');//import the 'mongoose' module
 const app = express();
 const exphbs = require('express-handlebars'); //https://github.com/express-handlebars/express-handlebars
 const PORT = process.env.PORT || 3000;
@@ -9,20 +10,13 @@ const coursesRoutes = require('./routs/courses');
 const cardRoutes = require('./routs/card');
 
 
-//cloud.mongodb.com
-const password_old = 'BXz3ZL8e7NCdcy63';
-const password = 'qblEcEvPdp3xh2bT';
-const url = `mongodb+srv://anode:qblEcEvPdp3xh2bT@cluster0.o5pllfj.mongodb.net/?retryWrites=true&w=majority`
-
-
-
-const hbs = exphbs.create ({
+const hbs = exphbs.create({
     defaultLayout: 'main',
     extname: 'hbs'
 })
 
 app.engine('hbs', hbs.engine);
-app.set ('view engine', 'hbs');
+app.set('view engine', 'hbs');
 app.set('views', 'views');
 
 //router registration
@@ -33,6 +27,27 @@ app.use('/add', addRoutes);
 app.use('/courses', coursesRoutes);
 app.use('/card', cardRoutes);
 
-app.listen(PORT, () => {
-    console.log(`Server is running ${PORT}`)
-})
+//connected to the mongodb database
+async function start() {
+    try {
+        mongoose.set('strictQuery', true);
+        const url = `mongodb+srv://anode:bOKT2JLZavt6zpY3@cluster0.o5pllfj.mongodb.net/?retryWrites=true&w=majority`//cloud.mongodb.com
+        await mongoose.connect(url, {useNewUrlParser: true});
+
+        app.listen(PORT, () => {
+            console.log(`Server is running or port ${PORT}`)
+        })
+
+    } catch (e) {
+        console.log(e)
+    }
+}
+
+start();
+
+
+
+
+
+
+
