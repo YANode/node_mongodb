@@ -2,22 +2,30 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');//import the 'mongoose' module
 const app = express();
-const exphbs = require('express-handlebars'); //https://github.com/express-handlebars/express-handlebars
 const PORT = process.env.PORT || 3000;
 const mainRoutes = require('./routs/main');
 const addRoutes = require('./routs/add');
 const coursesRoutes = require('./routs/courses');
 const cardRoutes = require('./routs/card');
 
-
+          //from version 4.6.0 on,  Handlebars used:
+         // terminal: npm install @handlebars/allow-prototype-access
+        //  terminal: npm install express-handlebars
+const Handlebars = require('handlebars');
+const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access');
+const exphbs = require('express-handlebars'); //https://github.com/express-handlebars/express-handlebars
 const hbs = exphbs.create({
     defaultLayout: 'main',
-    extname: 'hbs'
+    extname: 'hbs',
+    handlebars: allowInsecurePrototypeAccess(Handlebars) //from version 4.6.0 on,  Handlebars used
 })
+
+
 
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 app.set('views', 'views');
+
 
 //router registration
 app.use(express.static(path.join(__dirname, 'public')));
@@ -26,6 +34,7 @@ app.use('/', mainRoutes);
 app.use('/add', addRoutes);
 app.use('/courses', coursesRoutes);
 app.use('/card', cardRoutes);
+
 
 //connected to the mongodb database
 async function start() {
