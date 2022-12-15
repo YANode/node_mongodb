@@ -2,14 +2,14 @@
 const {Schema, model} = require('mongoose');
 
 //create a new 'course' object of the 'Schema' class
-const course = new Schema ({
-    title:{
+const course = new Schema({
+    title: {
         type: String,
         required: true
     },
     price: {
         type: Number,
-        required: true
+        required: true,
     },
     img: String,
 })

@@ -1,5 +1,6 @@
 const {Router} = require('express');
 const router = Router();
+
 //refactoring: leave the 'Course' model unchanged
 const Course = require('../models/course.js');
 
