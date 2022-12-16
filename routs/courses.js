@@ -37,6 +37,18 @@ router.get('/:id/edit', async (req, res) => {
     })
 })
 
+// the 'remove' event, that we get from the client when the 'Delete course' button is pressed
+router.post('/remove', async (req, res) => {
+   try {
+       await Course.deleteOne({ _id: req.body.id });
+       return res.redirect('/courses');
+   } catch (e) {
+       console.log(e)
+   }
+
+})
+
+
 
 // сhanged the data in the server database
 router.post('/edit', async (req, res) => {
@@ -50,9 +62,10 @@ router.post('/edit', async (req, res) => {
 })
 
 
-//content 'course' page download by id
+//open the content 'course' page download by id
 router.get('/:id', async (req, res) => {
 
+    console.log('ID', req.params.id);
     //refactoring: const course = await Course.getById(req.params.id) - the place where the identifier is stored
     const course = await Course.findById(req.params.id);
 

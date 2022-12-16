@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
     });
 })
 
-
+//creating a new course
 router.post('/', async (req, res) => {
 
     //refactoring: const course = new Course(req.body.title, req.body.price, req.body.img);

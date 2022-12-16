@@ -18,7 +18,7 @@
                         <a href="/courses/{{id}}" target="blank">Open the course</a>
                         {{!-- {{req.query.allow contains the URL query parameters - after the ? }} --}}
                         <a href="/courses/{{id}}/edit?allow=true">Edit</a>
-                        {{!-- {{a button to add a new course to the cart }} --}}
+                        {{!-- {{a button to delete the course }} --}}
                         <form action="/card/add" method="POST">
                             <input type="hidden" name="id" value="{{id}}">
                             <button type="submit" class="btn btn-primary">Buy</button>
