@@ -12,7 +12,14 @@ const course = new Schema({
         required: true,
     },
     img: String,
+    userId: { //to link tables in the database
+        type: Schema.Types.ObjectId,
+        ref: 'User' //linking with the model/user.js -> 'model('User', userSchema)' table in the database
+        }
 })
+
+
+
 
 
 //exported 'model'

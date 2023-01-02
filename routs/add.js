@@ -11,15 +11,19 @@ router.get('/', (req, res) => {
     });
 })
 
-//creating a new course
+//middleware at the route level - creating a new course
 router.post('/', async (req, res) => {
 
     //refactoring: const course = new Course(req.body.title, req.body.price, req.body.img);
     const course = new Course({
         title: req.body.title,
         price: req.body.price,
-        img: req.body.img
+        img: req.body.img,
+        userId: 'req.user._id'//_id user from mongodb
+
     })
+
+
 
     //eliminated possible errors
     try {
