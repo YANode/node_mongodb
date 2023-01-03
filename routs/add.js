@@ -2,7 +2,7 @@ const {Router} = require('express');
 const router = Router();
 
 //refactoring: leave the 'Course' model unchanged
-const Course = require('../models/course.js');
+const Course = require('../models/course');
 
 router.get('/', (req, res) => {
     res.render('add', {
@@ -19,7 +19,7 @@ router.post('/', async (req, res) => {
         title: req.body.title,
         price: req.body.price,
         img: req.body.img,
-        userId: 'req.user._id'//_id user from mongodb
+        userId: req.user._id//_id user from mongodb
 
     })
 

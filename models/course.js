@@ -20,7 +20,5 @@ const course = new Schema({
 
 
 
-
-
 //exported 'model'
 module.exports = model('Course', course);

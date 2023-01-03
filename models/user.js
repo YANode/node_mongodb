@@ -27,8 +27,6 @@ const userSchema = new Schema({
             }
         ]
     }
-
-
 });
 
 //register a new 'User' model with the 'userSchema' schema
