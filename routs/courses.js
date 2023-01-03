@@ -6,8 +6,8 @@ const Course = require('../models/course');//connect the "course.js" course crea
 router.get('/', async (req, res) => {
 
     // refactoring: const courses = await Course.getAll() - to retrieve data read from getAll()
-    const courses = await Course.find();
-    console.log(courses);
+    const courses = await Course.find().populate('userId');//added to the 'course' DB information from the 'user' DB:email, name
+console.log(courses)
 
     //template code output
     res.render('courses', {
