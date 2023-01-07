@@ -29,8 +29,59 @@ const userSchema = new Schema({
     }
 });
 
+//add item to cart
+userSchema.methods.addToCart = function (course) {
+
+
+    /*extended code start
+
+        //const clonedItems = this.cart.items.concat();
+        //or
+       const clonedItems = [...this.cart.items]; //clone the array items
+
+        //find the index of the 'course' we want to put in the cart
+        const idx = clonedItems.findIndex(c=>{ //at each iteration we get a course object
+            return c.courseId.toString() === course._id.toString();
+            if (idx>=0) {
+                //there is a course with this index - let's increase the "count" by 1
+                 clonedItems[idx].count = this.cart.items[idx].count + 1
+            }else{
+                clonedItems.push({
+                    count: 1,
+                    courseId: course._id
+                })
+            }
+        })
+        const newCart = {items: cloneItems}
+        this.cart = newCart;
+
+   extended code end */
+
+    //simplified code start
+    const items = [...this.cart.items];
+    const idx = items.findIndex(c => {
+        return c.courseId.toString() === course._id.toString();
+    })
+
+    if (idx >= 0) {
+        items[idx].count = items[idx].count + 1
+    } else {
+        items.push({
+            count: 1,
+            courseId: course._id,
+        })
+    }
+
+    this.cart = {items};
+    //simplified code end
+
+    return this.save();
+}
+
+
 //register a new 'User' model with the 'userSchema' schema
 module.exports = model('User', userSchema);
+
 
 
 
