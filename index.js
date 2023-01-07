@@ -31,7 +31,7 @@ app.set('views', 'views');
 //proprietary middleware at the application level - processing without mounted path
 app.use(async(req,res, next) => { //is performed whenever a request is received by the application
     try {
-        const user = await User.findById('63a17f2c56295cd0f1d49854');//_id user from mongodb
+        const user = await User.findById('63b6ce9979fea6f9f6cd5687');//_id user from mongodb
         req.user = user;
         next();
     } catch (e) {
