@@ -5,6 +5,23 @@ const router = Router();
 //connect the Card model, Course model
 const Course = require('../models/course');
 
+//return the data on all courses in the cart
+function mapCartItems(cart) {
+    return cart.items.map(c => ({//iteration of all courses in the cart
+        ...c.courseId._doc, //clone and output the content of the 'course' without metadata
+        count: c.count
+    }))
+}
+//calculation of the total price of all courses in the cart
+function computePrice(courses) {
+    // for each element of the array 'courses' run the function,
+    // pass the intermediate result as the first argument further
+    return courses.reduce((total, course) => {
+        return total += course.price * course.count
+    }, 0)
+
+}
+
 //sending data to the server
 router.post('/add', async (req, res) => {
     //refactoring: const course = await Course.getById(req.body.id)
@@ -16,29 +33,47 @@ router.post('/add', async (req, res) => {
 
 //add a route to the Router object
 router.get('/', async (req, res) => {
-   /* const card = await Card.fetch();
+
+    /*refactoring:   const card = await Card.fetch();
+                     res.render('card', {
+                         title: 'Cart',
+                         isCard: true,
+                         courses: card.courses,
+                         price: card.price
+                         */
+    const user = await req.user //get user
+        .populate('cart.items.courseId') //fetching all content from the 'courseId' database to the specified path
+
+
+    //forming an array of courses in the user's cart
+    const courses = mapCartItems(user.cart);
     res.render('card', {
         title: 'Cart',
         isCard: true,
-        courses: card.courses,
-        price: card.price
-        */
-    res.json ({test: true});
+        courses: courses,
+        price: computePrice(courses),//total price
+    })
+})
+
+
+    router.delete('/remove/:id', async (req, res) => { //read the id of the 'course' to be deleted
+
+        const card = await Card.remove(req.params.id); //update the 'card' object with the received id
+
+        res.status(200).json(card); //send the 'card' to the server
     })
 
 
 
 
 
-router.delete('/remove/:id', async (req, res) => { //read the id of the 'course' to be deleted
 
-    const card = await Card.remove(req.params.id); //update the 'card' object with the received id
 
-    res.status(200).json(card); //send the 'card' to the server
-})
+
 
 
 
 //export the router object
-module.exports = router;
+    module.exports = router
+
 
