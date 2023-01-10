@@ -12,6 +12,7 @@ function mapCartItems(cart) {
         count: c.count
     }))
 }
+
 //calculation of the total price of all courses in the cart
 function computePrice(courses) {
     // for each element of the array 'courses' run the function,
@@ -44,7 +45,6 @@ router.get('/', async (req, res) => {
     const user = await req.user //get user
         .populate('cart.items.courseId') //fetching all content from the 'courseId' database to the specified path
 
-
     //forming an array of courses in the user's cart
     const courses = mapCartItems(user.cart);
     res.render('card', {
@@ -56,24 +56,24 @@ router.get('/', async (req, res) => {
 })
 
 
-    router.delete('/remove/:id', async (req, res) => { //read the id of the 'course' to be deleted
+router.delete('/remove/:id', async (req, res) => { //read the id of the 'course' to be deleted
+    /*refactoring: const card = await Card.remove(req.params.id); //update the 'card' object with the received id*/
+    await req.user.removeFromCart(req.params.id);
 
-        const card = await Card.remove(req.params.id); //update the 'card' object with the received id
+    const user = await req.user.populate('cart.items.courseId');
 
-        res.status(200).json(card); //send the 'card' to the server
-    })
+    const courses = mapCartItems(user.cart);
 
+    const cart = {
+        courses,
+        price: computePrice(courses)
+    }
 
-
-
-
-
-
-
-
+    res.status(200).json(cart); //send the 'card' to the server
+})
 
 
 //export the router object
-    module.exports = router
+module.exports = router
 
 
