@@ -64,7 +64,7 @@ userSchema.methods.addToCart = function (course) {
     })
 
     if (idx >= 0) {
-        items[idx].count = items[idx].count + 1
+        items[idx].count = items[idx].count + 1;
     } else {
         items.push({
             count: 1,
@@ -78,9 +78,31 @@ userSchema.methods.addToCart = function (course) {
     return this.save();
 }
 
+//remove the course with the specified id from the cart
+userSchema.methods.removeFromCart = function (id) {//'id' - of the course to be deleted
+    //clone the array items
+    let items = [...this.cart.items];
+    //find the course index to be deleted
+    const idx = items.findIndex(c => {
+        return c.courseId.toString() === id.toString();
+    }) //'courseId' - courseId from userSchema
+
+    if (items[idx] === 1) {
+        items = items.filter(c => {
+            return c.courseId.toString() === id.toString();
+        })
+    } else {
+        items[idx].count--;
+    }
+
+    this.cart = {items};
+    return this.save();
+}
+
 
 //register a new 'User' model with the 'userSchema' schema
 module.exports = model('User', userSchema);
+
 
 
 
