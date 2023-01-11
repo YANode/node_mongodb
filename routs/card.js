@@ -9,6 +9,7 @@ const Course = require('../models/course');
 function mapCartItems(cart) {
     return cart.items.map(c => ({//iteration of all courses in the cart
         ...c.courseId._doc, //clone and output the content of the 'course' without metadata
+        id: c.courseId.id, //changed _id to id
         count: c.count
     }))
 }

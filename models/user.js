@@ -84,11 +84,11 @@ userSchema.methods.removeFromCart = function (id) {//'id' - of the course to be 
     let items = [...this.cart.items];
     //find the course index to be deleted
     const idx = items.findIndex(c => {
-        return c.courseId.toString() === id.toString();
-    }) //'courseId' - courseId from userSchema
+        return c.courseId.toString() === id.toString();//'courseId' - courseId from userSchema
+    })
 
     if (items[idx] === 1) {
-        items = items.filter(c => {
+        items = items.filter(c => {//creates a new array, filtering out all elements that satisfy the condition
             return c.courseId.toString() === id.toString();
         })
     } else {

@@ -2,7 +2,7 @@
 const {Schema, model} = require('mongoose');
 
 //create a new 'course' object of the 'Schema' class
-const course = new Schema({
+const courseSchema = new Schema({
     title: {
         type: String,
         required: true,
@@ -18,7 +18,18 @@ const course = new Schema({
         }
 })
 
+//data transformation in the 'course' object
+courseSchema.method('toClient', function() {
+    //get the 'course' object
+    const course = this.ObjectId;
+    //changed _id to id
+    course.id = course._id;
+    //deleted no need information
+    delete course._id;
+
+    return course;
+})
 
 
 //exported 'model'
-module.exports = model('Course', course);
+module.exports = model('Course', courseSchema);
