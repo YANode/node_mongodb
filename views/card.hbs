@@ -29,6 +29,10 @@
 
         <p><strong>Price:</strong><span class="price">{{price}}</span></p>
 
+        <form action="/orders" method="post">
+            <button type="submit" class="btn">Order</button>
+        </form>
+
     {{else}}
         <p>Сart is empty</p>
 

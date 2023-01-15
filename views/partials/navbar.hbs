@@ -3,6 +3,8 @@
         <a href="#" class="brand-logo">Courses App</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
 
+            {{!-- {{add menu items to the navigation bar}} --}}
+
             {{#if isMain}}
                 <li class="active"><a href="/">Main</a></li>
             {{else}}
@@ -29,6 +31,12 @@
                 <li><a href="/card">Cart</a></li>
             {{/if}}
 
-</ul>
-</div>
+            {{#if isOrder}}
+                <li class="active"><a href="/orders">Orders</a></li>
+            {{else}}
+                <li><a href="/orders">Orders</a></li>
+            {{/if}}
+
+        </ul>
+    </div>
 </nav>
