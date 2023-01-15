@@ -7,6 +7,7 @@ const mainRoutes = require('./routs/main');
 const addRoutes = require('./routs/add');
 const coursesRoutes = require('./routs/courses');
 const cardRoutes = require('./routs/card');
+const orderRoutes = require('./routs/orders')
 const User = require('./models/user');
 
 //from version 4.6.0 on,  Handlebars used:
@@ -49,6 +50,7 @@ app.use('/', mainRoutes);
 app.use('/add', addRoutes);
 app.use('/courses', coursesRoutes);
 app.use('/card', cardRoutes);
+app.use('/orders', orderRoutes);
 
 
 //connected to the mongodb database

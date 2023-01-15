@@ -87,9 +87,9 @@ userSchema.methods.removeFromCart = function (id) {//'id' - of the course to be 
         return c.courseId.toString() === id.toString();//'courseId' - courseId from userSchema
     })
 
-    if (items[idx] === 1) {
+    if (items[idx].count === 1) {
         items = items.filter(c => {//creates a new array, filtering out all elements that satisfy the condition
-            return c.courseId.toString() === id.toString();
+            return c.courseId.toString() !== id.toString();
         })
     } else {
         items[idx].count--;
