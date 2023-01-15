@@ -1,6 +1,7 @@
 //get the router object from the library
 const {Router} = require('express');
 const router = Router();
+const Order = require('../models/order');//import the Order model,
 
 // content of the orders page download by link
 router.get('/', (req, res) => {
