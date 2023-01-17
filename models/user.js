@@ -99,9 +99,16 @@ userSchema.methods.removeFromCart = function (id) {//'id' - of the course to be 
     return this.save();
 }
 
+//creating a method for clearing  the cart
+userSchema.methods.clearCart = function () {
+    this.cart = {items: []};
+    return this.save();
+}
+
 
 //register a new 'User' model with the 'userSchema' schema
 module.exports = model('User', userSchema);
+
 
 
 

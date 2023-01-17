@@ -7,7 +7,7 @@ router.get('/', async (req, res) => {
 
     // refactoring: const courses = await Course.getAll() - to retrieve data read from getAll()
     const courses = await Course.find().populate('userId');//added to the 'course' DB information from the 'user' DB:email, name
-console.log(courses)
+
 
     //template code output
     res.render('courses', {
@@ -65,7 +65,6 @@ router.post('/edit', async (req, res) => {
 //open the content 'course' page download by id
 router.get('/:id', async (req, res) => {
 
-    console.log('ID', req.params.id);
     //refactoring: const course = await Course.getById(req.params.id) - the place where the identifier is stored
     const course = await Course.findById(req.params.id);
 
