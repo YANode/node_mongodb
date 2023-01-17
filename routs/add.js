@@ -23,8 +23,6 @@ router.post('/', async (req, res) => {
 
     })
 
-
-
     //eliminated possible errors
     try {
         await course.save();

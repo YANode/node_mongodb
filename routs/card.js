@@ -5,7 +5,7 @@ const router = Router();
 //connect the Card model, Course model
 const Course = require('../models/course');
 
-//return the data on all courses in the cart
+//return the data on all courses in the cart without meta
 function mapCartItems(cart) {
     return cart.items.map(c => ({//iteration of all courses in the cart
         ...c.courseId._doc, //clone and output the content of the 'course' without metadata
