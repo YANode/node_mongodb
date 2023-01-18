@@ -1,5 +1,4 @@
 //added currency in the course card
-
 const toCurrency = price => {
 return new Intl.NumberFormat('en-US', {
     currency: 'USD',
@@ -9,6 +8,24 @@ return new Intl.NumberFormat('en-US', {
 document.querySelectorAll('.price').forEach(node => {
     node.textContent = toCurrency(node.textContent);
 })
+
+//сhanging the time format in the order
+const toDate = date => {
+    return new Intl.DateTimeFormat( 'en-US',{
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+    }).format(new Date(date));
+}
+document.querySelectorAll('.date').forEach( node => {
+    node.textContent = toDate(node.textContent);
+})
+
+
+
 
 
 //set the event handler for the button 'Delete' on the page 'Cart'
